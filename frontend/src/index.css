@@ -1,0 +1,16 @@
+@import "tailwindcss";
+
+
+/* Add to index.css */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+body{
+  background-color: black;
+  font-family: "Poppins", sans-serif;
+}
