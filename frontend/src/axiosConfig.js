@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: "http://localhost:7000",
+  baseURL: import.meta.env.VITE_BACKEND_URL,
 });
 
 // Attach token
@@ -15,18 +15,3 @@ instance.interceptors.request.use((config) => {
 
 export default instance;
 
-// import axios from "axios";
-
-// const instance = axios.create({
-//   baseURL: "http://localhost:7000",
-// });
-
-// instance.interceptors.request.use((config) => {
-//   const token = localStorage.getItem("token");
-//   if (token) {
-//     config.headers.Authorization = `Bearer ${token}`;
-//   }
-//   return config;
-// });
-
-// export default instance;
