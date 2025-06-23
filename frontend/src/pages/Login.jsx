@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import logo from '../assets/logo.png'; // Replace with your logo path
+import logo from '../assets/logo.png';
 import { AuthContext } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import axios from '../axiosConfig';
@@ -14,28 +14,67 @@ const Login = () => {
   const { login } = useContext(AuthContext);
   const navigate = useNavigate();
 
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   setLoading(true);
+
+  //   try {
+  //     if (signState === 'Sign Up') {
+  //       await axios.post('/api/auth/register', { username, email, password });
+
+  //       toast.success('Registration successful. Please log in.');
+  //     } else {
+  //       const res = await axios.post('/api/auth/login', { email, password });
+  //       console.log("Token received from backend:", res.data.token);
+  //       if (!email || !password) {
+  //         toast.error("Please enter both email and password.");
+  //         setLoading(false);
+  //         return;
+  //       }
+  //       login(res.data.token);
+  //       toast.success('Login successful!');
+  //       navigate('/');
+  //     }
+  //   } catch (err) {
+  //     toast.error(err.response?.data?.error || 'Something went wrong.');
+  //   }
+  //   setLoading(false);
+  // };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
 
     try {
       if (signState === 'Sign Up') {
-        await axios.post('/api/auth/register', { username, email, password });
+        const res = await axios.post('/api/auth/register', { username, email, password });
 
-        toast.success('Registration successful. Please log in.');
+        const { token } = res.data;
+        if (token) {
+          login(token); // ✅ save token to localStorage via AuthContext
+          toast.success("Registration successful!");
+          navigate("/"); // ✅ redirect to homepage or dashboard
+        } else {
+          toast.success("Registration successful. Please log in.");
+          setSignState("Sign In");
+        }
       } else {
-        const res = await axios.post('/api/auth/login', { email, password });
-        console.log("Token received from backend:", res.data.token);
         if (!email || !password) {
           toast.error("Please enter both email and password.");
           setLoading(false);
           return;
         }
-        login(res.data.token);
+
+        const res = await axios.post('/api/auth/login', { email, password });
+
+        const { token } = res.data;
+        console.log("Token received from backend:", token);
+        login(token); 
         toast.success('Login successful!');
         navigate('/');
       }
     } catch (err) {
+      console.error("Login error:", err.response?.data); 
       toast.error(err.response?.data?.error || 'Something went wrong.');
     }
     setLoading(false);

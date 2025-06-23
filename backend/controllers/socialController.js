@@ -1,20 +1,5 @@
-// controllers/socialController.js
+
 const User = require("../models/User");
-
-// exports.getSocial = async (req, res) => {
-//   try {
-//     const user = await User.findById(req.user.id)
-//       .populate("followers", "username email")
-//       .populate("following", "username email");
-
-//     res.json({
-//       followers: user.followers,
-//       following: user.following,
-//     });
-//   } catch (err) {
-//     res.status(500).json({ message: "Failed to load social data" });
-//   }
-// };
 
 exports.getSocial = async (req, res) => {
   console.log("📡 Reached GET /api/social");

@@ -10,18 +10,39 @@ export const AuthProvider = ({ children }) => {
     return storedToken ? jwtDecode(storedToken) : null;
   });
 
+  // useEffect(() => {
+  //   if (token) {
+  //     try {
+  //       const decoded = jwtDecode(token);
+  //       setUser(decoded);
+  //       localStorage.setItem('token', token);
+  //     } catch (err) {
+  //       console.error("Error decoding token:", err);
+  //       toast.error("Invalid or expired token");
+  //       setUser(null);
+  //       setToken(null);
+  //       localStorage.removeItem('token');
+  //     }
+  //   } else {
+  //     setUser(null);
+  //     localStorage.removeItem('token');
+  //   }
+  // }, [token]);
   useEffect(() => {
     if (token) {
       try {
         const decoded = jwtDecode(token);
+        if (decoded.exp * 1000 < Date.now()) {
+          logout();
+          toast.warning("Session expired. Please log in again.");
+          return;
+        }
         setUser(decoded);
         localStorage.setItem('token', token);
       } catch (err) {
         console.error("Error decoding token:", err);
+        logout();
         toast.error("Invalid or expired token");
-        setUser(null);
-        setToken(null);
-        localStorage.removeItem('token');
       }
     } else {
       setUser(null);

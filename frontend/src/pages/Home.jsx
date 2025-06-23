@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from '../axiosConfig';
 import { Link } from 'react-router-dom';
 import { FaRegCirclePlay } from 'react-icons/fa6';
-import MovieCards from '../components/MovieCards'; 
+import MovieCards from '../components/MovieCards';
 import Filter from '../components/Filter';
 import WatchlistButton from '../components/WatchlistButton';
 import FavoriteButton from '../components/FavoriteButton';
@@ -12,7 +12,7 @@ import RecommendedMovies from '../components/RecommendedMovies';
 const Home = () => {
   const [movie, setMovie] = useState(null);
   const [movies, setMovies] = useState([]);
-  
+
 
 
   useEffect(() => {
@@ -31,26 +31,21 @@ const Home = () => {
 
 
   const fetchMovies = async ({ genre, year } = {}) => {
-  try {
-    const queryParams = [];
-    if (genre) queryParams.push(`genre=${genre}`);
-    if (year) queryParams.push(`year=${year}`);
-    const query = queryParams.length ? `?${queryParams.join('&')}` : '';
-    const res = await axios.get(`/api/discover${query}`);
-    setMovies(res.data);
-  } catch (err) {
-    console.error('Error fetching filtered movies', err);
-  }
-};
+    try {
+      const queryParams = [];
+      if (genre) queryParams.push(`genre=${genre}`);
+      if (year) queryParams.push(`year=${year}`);
+      const query = queryParams.length ? `?${queryParams.join('&')}` : '';
+      const res = await axios.get(`/api/discover${query}`);
+      setMovies(res.data);
+    } catch (err) {
+      console.error('Error fetching filtered movies', err);
+    }
+  };
 
-// Fetch on first load
-useEffect(() => {
-  fetchMovies(); // Works fine now even without arguments
-}, []);
   return (
     <div className="pt-16 bg-black text-white min-h-screen">
       {/* Hero Section */}
-
       {movie && (
         <div className="relative h-[70vh] w-full">
           <img
@@ -59,8 +54,8 @@ useEffect(() => {
             className="w-full h-full object-cover brightness-[0.4]"
           />
 
-          <div className="absolute inset-0 flex flex-col justify-center px-6 md:px-20 gap-4">
-            <h1 className="text-[40px] md:text-[70px] font-bold">Welcome.</h1>
+          <div className="absolute inset-0 flex flex-col justify-center px-6 md:px-20 gap-2">
+            <h1 className="text-[40px] md:text-[70px] font-bold">MovieCinema</h1>
             <p className="max-w-xl text-sm md:text-lg text-gray-200">
               Discover your next favorite movie with personalized recommendations.
             </p>
@@ -108,8 +103,8 @@ useEffect(() => {
         <MovieCards title="Upcoming" category="upcoming" />
         <MovieCards title="Top Picks for You" category="now_playing" />
       </div>
-          
-          <RecommendedMovies /> 
+
+      <RecommendedMovies />
     </div>
   );
 };

@@ -1,4 +1,4 @@
-// src/components/FollowButton.jsx
+
 import React, { useEffect, useState } from "react";
 import axios from "../axiosConfig";
 

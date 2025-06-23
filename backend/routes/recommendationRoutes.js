@@ -1,4 +1,4 @@
-// routes/recommendationRoutes.js
+
 const express = require("express");
 const router = express.Router();
 const jwt = require("jsonwebtoken");
@@ -18,8 +18,8 @@ router.get("/", async (req, res) => {
   }
 
   try {
-    const user = await User.findById(decoded.id); // Example logic: use genres from favorites
-    const favoriteGenres = user.favoriteGenres || [28, 12]; // fallback
+    const user = await User.findById(decoded.id); // use genres from favorites
+    const favoriteGenres = user.favoriteGenres || [28, 12]; 
 
     const genreQuery = favoriteGenres.join(",");
     const tmdbRes = await axios.get(

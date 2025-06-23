@@ -94,49 +94,21 @@ exports.unFollowUser = async (req, res) => {
   res.json({ message: "Unfollowed successfully" });
 };
 
-// exports.uploadAvatar = async (req, res) => {
-//   try {
-//     const userId = req.params.id;
 
-//     if (!req.file) {
-//       return res.status(400).json({ message: "No file uploaded" });
-//     }
-
-//     const filePath = `uploads/avatars/${req.file.filename}`;
-//     console.log("Saving file path:", filePath);
-
-//     const user = await User.findByIdAndUpdate(
-//       userId,
-//       { avatarUrl: filePath },
-//       { new: true }
-//     );
-
-//     if (!user) {
-//       return res.status(404).json({ message: "User not found" });
-//     }
-
-//     res
-//       .status(200)
-//       .json({ message: "Avatar uploaded", avatarUrl: user.avatarUrl });
-//   } catch (error) {
-//     console.error("Upload error:", error);
-//     res.status(500).json({ message: "Upload failed", error });
-//   }
-// };
 exports.uploadAvatar = async (req, res) => {
   try {
     console.log("Incoming avatar upload...");
-    console.log("req.file:", req.file); // This should contain the uploaded file
+    console.log("req.file:", req.file); 
 
     const userId = req.params.id;
 
     if (!req.file) {
-      console.log("❌ No file received");
+      console.log("No file received");
       return res.status(400).json({ message: "No file uploaded" });
     }
 
     const filePath = `uploads/avatars/${req.file.filename}`;
-    console.log("✅ File path to save:", filePath);
+    console.log(" File path to save:", filePath);
 
     const user = await User.findByIdAndUpdate(
       userId,
@@ -148,12 +120,12 @@ exports.uploadAvatar = async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
 
-    console.log("✅ Avatar saved to user:", user.avatarUrl);
+    console.log(" Avatar saved to user:", user.avatarUrl);
     res
       .status(200)
       .json({ message: "Avatar uploaded", avatarUrl: user.avatarUrl });
   } catch (error) {
-    console.error("❌ Upload error:", error);
+    console.error("Upload error:", error);
     res.status(500).json({ message: "Upload failed", error });
   }
 };

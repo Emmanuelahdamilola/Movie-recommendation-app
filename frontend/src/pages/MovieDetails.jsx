@@ -143,7 +143,7 @@ const MovieDetails = () => {
         const res = await axios.get('/api/favorites', {
           headers: { Authorization: `Bearer ${token}` },
         });
-        setWatchlist(res.data); // Assuming it's an array of movie objects
+        setWatchlist(res.data);
       } catch (err) {
         toast.error('Error fetching watchlist:', err);
       }
@@ -161,9 +161,7 @@ const MovieDetails = () => {
           },
         });
 
-        // Use the correct path to the array
         const favorites = Array.isArray(res.data) ? res.data : res.data.favorites;
-
         const alreadyInList = favorites.some((item) => item.movieId === movie.id);
         setIsInWatchlist(alreadyInList);
 
@@ -204,40 +202,36 @@ const MovieDetails = () => {
 
 
   return (
-    <div
-      className="relative min-h-screen text-white"
-      style={{
-        backgroundImage: `url(https://image.tmdb.org/t/p/original${movie.backdrop_path})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
-      }}
-    >
-      {/* 🔲 Dark overlay */}
-      <div className="absolute inset-0 bg-black bg-opacity-80 z-0"></div>
+    <div>
+      <div className="relative h-full w-full">
+        <img
+          src={`https://image.tmdb.org/t/p/original/${movie.backdrop_path}`}
+          alt="Hero"
+          className="w-full h-full object-cover brightness-[0.4]"
+        />
 
-      <div className="relative z-10 px-4 py-30">
-        <div className="flex flex-col md:flex-row lg:flex-row gap-6 max-w-3xl mx-auto">
-          <img
-            src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-            alt={movie.title}
-            className="w-full md:w-[300px] rounded shadow-lg"
-          />
+        <div className="absolute inset-0 flex flex-col justify-center  px-6 md:p-80 gap-6 text-white z-10">
+          <div className="flex flex-col md:flex-row gap-6 max-w-4xl mx-auto">
+            <img
+              src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+              alt={movie.title}
+              className="w-full md:w-[300px] rounded shadow-lg"
+            />
+            <div>
+              <h1 className="text-3xl md:text-5xl font-bold mb-2">{movie.title}</h1>
+              <p className="text-gray-300 mb-4">{movie.release_date} | ⭐ {movie.vote_average}</p>
+              <p className="mb-4 text-gray-200 text-sm md:text-base">{movie.overview}</p>
 
-          <div>
-            <h1 className="text-2xl md:text-4xl font-bold mb-2">{movie.title}</h1>
-            <p className="text-gray-300 mb-4">{movie.release_date} | ⭐ {movie.vote_average}</p>
-            <p className="mb-4 text-gray-200 text-sm md:text-base">{movie.overview}</p>
+              <div className="flex flex-wrap gap-2 mb-4">
+                {movie.genres?.map((genre) => (
+                  <span key={genre.id} className="border border-gray-400 px-3 py-1 rounded-full text-sm">{genre.name}</span>
+                ))}
+              </div>
 
-            <div className="flex flex-wrap gap-2">
-              {movie.genres?.map((genre) => (
-                <span key={genre.id} className="border border-gray-400 px-3 py-1 rounded-full text-sm">{genre.name}</span>
-              ))}
-            </div>
-
-            <div className="flex gap-6 items-center">
-              <WatchlistButton movie={movie} />
-              <FavoriteButton movie={movie} />
+              <div className="flex gap-4">
+                <WatchlistButton movie={movie} />
+                <FavoriteButton movie={movie} />
+              </div>
 
               {userLists.length > 0 && (
                 <div className="mt-6">
@@ -256,16 +250,16 @@ const MovieDetails = () => {
                 </div>
               )}
             </div>
-
           </div>
         </div>
-
-        <div className="w-md">
-           {movie && <ReviewSection movieId={movie.id} token={token} />}
+      </div>
+      <div className="px-6 mt-10 text-white">
+        <div className="w-md mb-10">
+          {movie && <ReviewSection movieId={movie.id} token={token} />}
         </div>
 
         {trailerKey && (
-          <div className="mt-16 px-10">
+          <div className="mt-16 px-4 md:px-10">
             <h2 className="text-xl font-semibold mb-2">Watch Trailer</h2>
             <div className="aspect-w-16 aspect-h-9">
               <iframe
@@ -296,15 +290,14 @@ const MovieDetails = () => {
                         className="rounded-md w-full h-[225px] object-cover"
                       />
                       <p className="text-xs mt-1 text-center">{movie.title}</p>
-
                       <button
                         onClick={(e) => {
                           e.preventDefault();
                           toggleWatchlist(movie.id, isInWatchlist);
                         }}
                         className={`text-xs mt-2 px-2 py-1 rounded block mx-auto ${isInWatchlist
-                          ? 'bg-gray-700 hover:bg-gray-600'
-                          : 'bg-red-600 hover:bg-red-700'
+                            ? 'bg-gray-700 hover:bg-gray-600'
+                            : 'bg-red-600 hover:bg-red-700'
                           }`}
                       >
                         {isInWatchlist ? '✓ Remove from Watchlist' : '+ Add to Watchlist'}
@@ -316,11 +309,9 @@ const MovieDetails = () => {
             </div>
           </div>
         )}
-
-
-
       </div>
     </div>
+
   );
 
 };

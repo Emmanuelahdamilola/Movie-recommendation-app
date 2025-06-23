@@ -24,7 +24,7 @@ exports.addFavoriteMovie = async (req, res) => {
   }
 };
 
-
+// remove a movie to favorites
 exports.removeFavoriteMovie = async (req, res) => {
   try {
     await Favorite.findOneAndDelete({

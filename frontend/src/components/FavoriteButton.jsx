@@ -1,4 +1,4 @@
-// src/components/FavoriteButton.jsx
+
 import { useEffect, useState } from 'react';
 import axios from '../axiosConfig';
 import { toast } from 'react-toastify';

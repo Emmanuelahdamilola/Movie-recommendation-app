@@ -12,7 +12,7 @@ const {
 
 router.use(authMiddleware);
 
-// 🟢 Separate route for adding a movie
+
 router.post("/add", addMovieToWatchlist); // POST /api/watchlists/add
 
 router.post("/", createWatchlist); // POST /api/watchlists

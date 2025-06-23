@@ -1,5 +1,4 @@
 const axios = require("axios");
-
 const TMDB_BASE_URL = "https://api.themoviedb.org/3";
 const API_KEY = process.env.TMDB_API_KEY;
 
@@ -43,7 +42,7 @@ exports.getMoviesByCategory = async (req, res) => {
     const response = await axios.get(url);
     res.status(200).json(response.data.results);
   } catch (err) {
-    console.error("❌ TMDB API failed:", err.response?.data || err.message);
+    console.error("TMDB API failed:", err.response?.data || err.message);
     res.status(500).json({ error: "Failed to fetch movies by category" });
   }
 };
@@ -57,7 +56,7 @@ exports.getMovieById = async (req, res) => {
     const response = await axios.get(url);
     res.status(200).json(response.data);
   } catch (err) {
-    console.error("🧨 Error fetching movie details:", {
+    console.error("Error fetching movie details:", {
       status: err.response?.status,
       data: err.response?.data,
       message: err.message,
@@ -86,7 +85,7 @@ exports.getSimilarMovies = async (req, res) => {
     const response = await axios.get(url);
     res.status(200).json(response.data.results);
   } catch (err) {
-    console.error("❌ Error fetching similar movies:", err.message);
+    console.error("Error fetching similar movies:", err.message);
     res.status(500).json({ error: "Failed to fetch related movies" });
   }
 };

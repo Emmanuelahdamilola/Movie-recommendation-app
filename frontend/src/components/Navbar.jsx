@@ -34,7 +34,7 @@ const Navbar = () => {
     setShowProfileMenu(!showProfileMenu);
   };
 
-  // Close dropdown when clicking outside
+
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (profileRef.current && !profileRef.current.contains(e.target)) {
@@ -50,7 +50,7 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
         {/* Logo */}
         <Link to="/" className="flex items-center space-x-2" onClick={closeMenu}>
-          <img src={logo} alt="Logo" className="h-8 w-auto" />
+          <h1 className="text-[20px] md:text-[30px] font-bold">MovieCinema</h1>
         </Link>
 
         {/* Search Bar */}
@@ -75,19 +75,7 @@ const Navbar = () => {
             </Link>
           )}
           {user && (<Link to="/social" className="hover:underline">Social</Link>)}
-
-          {user?.username && (
-            <Link to={`/user/${user.username}`} className="text-blue-400 hover:underline">
-              View Public Profile
-            </Link>
-          )}
           <Link to="/search" className="hover:text-gray-300">Search</Link>
-
-          {user && (
-            <Link to={`/users/${user._id}`} className="text-blue-600 hover:underline">
-              {user.username}
-            </Link>
-          )}
 
           {isAuthenticated ? (
             <div className="relative" ref={profileRef}>
@@ -140,12 +128,6 @@ const Navbar = () => {
           <Link to="/search" onClick={closeMenu} className="block hover:text-gray-300">Search</Link>
 
           {user && (<Link to="/social" className="hover:underline">Social</Link>)}
-
-          {user?.username && (
-            <Link to={`/user/${user.username}`} className="text-blue-400 hover:underline">
-              View Public Profile
-            </Link>
-          )}
 
           {isAuthenticated ? (
             <>

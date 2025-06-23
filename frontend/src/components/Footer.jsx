@@ -4,9 +4,9 @@ const Footer = () => {
   return (
     <footer className="bg-zinc-900 text-gray-400 px-6 py-10 mt-10">
       <div className="max-w-6xl mx-auto space-y-10">
-        {/* App Name & Message */}
+       
         <div className="text-center space-y-1">
-          <h2 className="text-2xl font-bold text-white tracking-wide">MovieBase</h2>
+            <h1 className="text-[30px] md:text-[50px] font-bold">MovieCinema</h1>
           <p className="text-sm text-gray-400 italic">Your ultimate movie discovery platform.</p>
         </div>
 

@@ -3,6 +3,6 @@ const express = require('express');
 const router = express.Router();
 const { discoverMovies } = require('../controllers/discoverController');
 
-router.get('/', discoverMovies); // GET /api/discover
+router.get('/', discoverMovies);
 
 module.exports = router;

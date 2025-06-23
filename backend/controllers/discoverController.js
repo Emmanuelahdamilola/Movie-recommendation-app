@@ -1,4 +1,4 @@
-// controllers/discoverController.js
+
 const axios = require("axios");
 
 const TMDB_BASE_URL = "https://api.themoviedb.org/3";
@@ -16,7 +16,7 @@ exports.discoverMovies = async (req, res) => {
     const response = await axios.get(url);
     res.json(response.data.results);
   } catch (err) {
-    console.error("❌ Error fetching discover movies:", err.message);
+    console.error("Error fetching discover movies:", err.message);
     res.status(500).json({ error: "Failed to fetch filtered movies" });
   }
 };

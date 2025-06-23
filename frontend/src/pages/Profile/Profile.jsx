@@ -1,4 +1,3 @@
-// Updated Profile.jsx with Avatar Upload, Tabs, Profile Info, Change Password, and Delete Account
 
 import React, { useEffect, useState } from "react";
 import axios from "../../axiosConfig";
@@ -68,35 +67,13 @@ const Profile = () => {
     }
   };
 
-  // const handleAvatarChange = async (e) => {
-  //   const file = e.target.files[0];
-  //   if (!file) return;
-
-  //   const formData = new FormData();
-  //   formData.append("avatar", file); // name must match multer config
-
-  //   try {
-  //     await axios.post(`/api/users/${user._id}/avatar`, formData, {
-  //       headers: {
-  //         Authorization: `Bearer ${token}`,
-  //         "Content-Type": "multipart/form-data",
-  //       },
-  //     });
-  //     toast.success("Avatar uploaded");
-  //     fetchUserInfo(user._id); // refresh user
-  //   } catch (err) {
-  //     toast.error("Upload failed");
-  //   }
-  // };
-
-
   const handleAvatarChange = async (e) => {
     const file = e.target.files[0];
     console.log("Selected file:", file);
     console.log("User ID:", user?._id);
 
     if (!file || !user?._id) {
-      console.warn("❌ No file or user ID found.");
+      console.warn("No file or user ID found.");
       return;
     }
 
@@ -110,17 +87,14 @@ const Profile = () => {
           "Content-Type": "multipart/form-data",
         },
       });
-      console.log("✅ Upload success:", response.data);
+      console.log("Upload success:", response.data);
       toast.success("Avatar uploaded successfully");
       fetchUserInfo(user._id);
     } catch (err) {
-      console.error("❌ Upload failed:", err.response?.data || err.message);
+      console.error("Upload failed:", err.response?.data || err.message);
       toast.error("Failed to upload avatar");
     }
   };
-
-
-
 
   const handleProfileUpdate = async () => {
     try {

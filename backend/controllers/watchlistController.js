@@ -1,4 +1,4 @@
-// controllers/watchlistController.js
+
 const Watchlist = require("../models/Watchlist");
 
 // Create a new watchlist
@@ -41,7 +41,7 @@ exports.addMovieToWatchlist = async (req, res) => {
     if (!list) {
       list = new Watchlist({
         userId: req.user.id,
-        name: "My Watchlist", // ✅ This fixes the ValidationError
+        name: "My Watchlist", 
         movies: [{ movieId, title, posterPath }],
       });
     } else {

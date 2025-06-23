@@ -10,12 +10,12 @@ const {
   getSimilarMovies,
 } = require('../controllers/movieController');
 
-// ✅ Most specific routes first
+// Most specific routes first
 router.get('/popular', getPopularMovies);
 router.get('/search', searchMovies);
 router.get('/category/:type', getMoviesByCategory);
 
-// ✅ Least specific route last
+// Least specific route last
 router.get('/:id', getMovieById);
 router.get('/:id/videos', getMovieVideos);
 router.get('/:id/similar', getSimilarMovies);

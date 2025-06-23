@@ -2,7 +2,7 @@ const FollowButton = ({ targetUserId, token }) => {
   const [isFollowing, setIsFollowing] = useState(false);
 
   useEffect(() => {
-    // Optional: fetch following state
+
   }, [targetUserId]);
 
   const toggleFollow = async () => {

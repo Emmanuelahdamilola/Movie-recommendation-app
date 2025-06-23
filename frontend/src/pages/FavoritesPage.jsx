@@ -1,4 +1,4 @@
-// src/pages/Favorites.jsx
+
 import React, { useEffect, useState, useContext } from 'react';
 import axios from '../axiosConfig';
 import { AuthContext } from '../context/AuthContext';
@@ -34,7 +34,7 @@ const Favorites = () => {
 
   return (
     <div className="p-4">
-      <div className="mt-20 bg-white">
+      <div className="bg-white">
     <h2 className="text-2xl font-bold mb-4">Your Favorite Movies</h2>
       {favorites.length === 0 ? (
         <p className="text-gray-500">No favorite movies yet.</p>
