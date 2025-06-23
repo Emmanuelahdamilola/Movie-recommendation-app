@@ -5,7 +5,7 @@ A full-featured movie recommendation platform where users can discover, search, 
 
 ## 🌟 Live Demo
 
-**Frontend:** [View on Netlify](https://movie-recommendation-app-52vz-dytgmu8ye.vercel.app/)  
+**Frontend:** [View on Netlify](https://movie-recommendation-app-52vz.vercel.app/)  
 **Backend:** [View on Render](https://movie-recommendation-app-rxmq.onrender.com)
 
 ---
