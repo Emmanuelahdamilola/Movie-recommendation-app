@@ -4,6 +4,7 @@ const instance = axios.create({
   baseURL: import.meta.env.VITE_BACKEND_URL,
 });
  
+
 // Attach token
 instance.interceptors.request.use((config) => {
   const token = localStorage.getItem("token");
